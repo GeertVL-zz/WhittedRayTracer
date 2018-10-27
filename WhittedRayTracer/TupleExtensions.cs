@@ -1,5 +1,3 @@
-using System;
-
 namespace WhittedRayTracer
 {
     public static class TupleExtensions
