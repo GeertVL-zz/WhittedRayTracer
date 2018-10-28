@@ -4,6 +4,8 @@ namespace WhittedRayTracer
 {
     public class FloatingPointHelper
     {
+        public const double Epsilon = 0.00001;
+        
         public static bool NearlyEqual(double a, double b, double epsilon)
         {
             double absA = Math.Abs(a);

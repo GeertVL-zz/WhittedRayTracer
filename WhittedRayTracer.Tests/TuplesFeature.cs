@@ -1,4 +1,5 @@
 using System;
+using WhittedRayTracer.Tests.Helpers;
 using Xunit;
 
 namespace WhittedRayTracer.Tests
@@ -230,6 +231,69 @@ namespace WhittedRayTracer.Tests
             
             Assert.Equal(new Vector(-1, 2, -1), Vector.Cross(a, b));
             Assert.Equal(new Vector(1, -2, 1), Vector.Cross(b, a));
+        }
+
+        [Fact(DisplayName = "Projectile in the world tests")]
+        public void ProjectileInWorld()
+        {
+            var p = new Projectile {Position = new Point(0, 1, 0), Velocity = new Vector(1, 1, 0).Normalize()};
+            var w = new World {Gravity = new Vector(0, -0.1, 0), Wind = new Vector(-0.01, 0, 0)};
+
+            var expected = new Projectile
+            {
+                Position = new Point(0.70710678118654746, 1.7071067811865475, 0), 
+                Velocity = new Vector(0.69710678118654745, 0.60710678118654748, 0)
+            };
+
+            var actual = MotionHelper.Tick(w, p);
+            
+            Assert.Equal(expected.Position, actual.Position);
+            Assert.Equal(expected.Velocity, actual.Velocity);
+        }
+
+        [Fact(DisplayName = "Colors are (red, green, blue) tuples")]
+        public void ColorsAreRGB()
+        {
+            var c = new Color(-0.5, 0.4, 1.7);
+            
+            Assert.Equal(-0.5, c.Red);
+            Assert.Equal(0.4, c.Green);
+            Assert.Equal(1.7, c.Blue);
+        }
+
+        [Fact(DisplayName = "Adding colors")]
+        public void AddingColors()
+        {
+            var a = new Color(0.9, 0.6, 0.75);
+            var b = new Color(0.7, 0.1, 0.25);
+            
+            Assert.Equal(new Color(1.6, 0.7, 1), a + b);
+        }
+
+        [Fact(DisplayName = "Subtracting colors")]
+        public void SubtractingColors()
+        {
+            var a = new Color(0.9, 0.6, 0.75);
+            var b = new Color(0.7, 0.1, 0.25);
+            
+            Assert.Equal(new Color(0.2, 0.5, 0.5), a - b);
+        }
+
+        [Fact(DisplayName = "Multiplying a color by a scalar")]
+        public void MultiplyingAColor()
+        {
+            var c = new Color(0.2, 0.3, 0.4);
+            
+            Assert.Equal(new Color(0.4, 0.6, 0.8), c * 2);
+        }
+
+        [Fact(DisplayName = "Multiplying colors")]
+        public void MultiplyingColors()
+        {
+            var c1 = new Color(1, 0.2, 0.4);
+            var c2 = new Color(0.9, 1, 0.1);
+            
+            Assert.Equal(new Color(0.9, 0.2, 0.04), c1 * c2);
         }
     }
 }

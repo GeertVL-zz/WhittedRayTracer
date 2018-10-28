@@ -13,5 +13,10 @@ namespace WhittedRayTracer
         {
             throw new ArithmeticException("Adding two points is not possible");
         }
+        
+        public static Point operator +(Point a, Vector b)
+        {
+            return new Point(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+        }
     }
 }
