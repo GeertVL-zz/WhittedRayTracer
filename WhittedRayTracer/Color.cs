@@ -20,8 +20,7 @@ namespace WhittedRayTracer
 
         public override bool Equals(object obj)
         {
-            var item = obj as Color;
-            if (item == null)
+            if (!(obj is Color item))
             {
                 return false;
             }
@@ -35,7 +34,7 @@ namespace WhittedRayTracer
         {
             unchecked
             {
-                int hashCode = base.GetHashCode();
+                var hashCode = base.GetHashCode();
                 hashCode = (hashCode ^ 397) * Red.GetHashCode();
                 hashCode = (hashCode ^ 397) * Green.GetHashCode();
                 hashCode = (hashCode ^ 397) * Blue.GetHashCode();
