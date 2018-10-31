@@ -52,5 +52,10 @@ namespace WhittedRayTracer
         {
             return new Vector(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.W + b.W);
         }
+        
+        public static Vector operator *(Vector a, double scalar)
+        {
+            return new Vector(a.X * scalar, a.Y * scalar, a.Z * scalar, a.W * scalar);
+        }
     }
 }
