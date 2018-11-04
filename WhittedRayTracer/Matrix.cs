@@ -27,11 +27,11 @@ namespace WhittedRayTracer
 
         public int Y
             => _y;
-        
+
         public static Matrix Identity
             => new Matrix(4, 4)
             {
-                All = new double[,] {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}}
+                All = new double[,] {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}
             };
 
         public Matrix Transpose()
@@ -46,6 +46,57 @@ namespace WhittedRayTracer
             }
 
             return result;
+        }
+
+        public double Determinant()
+        {
+            return this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0];
+        }
+
+        public Matrix DeleteRow(int row)
+        {
+            var result = new Matrix(X - 1, Y);
+            var currentRow = 0;
+            for (int i = 0; i < X; i++)
+            {
+                if (i != row)
+                {
+                    for (int j = 0; j < Y; j++)
+                    {
+                        result[currentRow, j] = this[i, j];
+                    }
+
+                    currentRow++;
+                }
+            }
+
+            return result;
+        }
+
+        public Matrix DeleteColumn(int column)
+        {
+            var result = new Matrix(X, Y - 1);
+            
+            for (int i = 0; i < X; i++)
+            {
+                var currentColumn = 0;
+                for (int j = 0; j < Y; j++)
+                {
+                    if (j != column)
+                    {
+                        result[i, currentColumn] = this[i, j];
+                        currentColumn++;
+                    }
+                }                
+            }
+
+            return result;
+        }
+
+        public Matrix SubMatrix(int row, int column)
+        {
+            var result = DeleteRow(row);
+            return result.DeleteColumn(column);
         }
 
         public override bool Equals(object obj)
