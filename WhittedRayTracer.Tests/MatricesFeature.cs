@@ -143,5 +143,11 @@ namespace WhittedRayTracer.Tests
             
             Assert.Equal(expected, a.Transpose());
         }
+
+        [Fact(DisplayName = "Transposing the identity matrix")]
+        public void TransposingIdentityMatrix()
+        {
+            Assert.Equal(Matrix.Identity, Matrix.Identity.Transpose());
+        }
     }
 }
