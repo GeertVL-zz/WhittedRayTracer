@@ -6,13 +6,6 @@ using System.Text;
 
 namespace WhittedRayTracer
 {
-    public class Pixel
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Color Color { get; set; }
-    }
-    
     public class Canvas
     {
         private readonly Color[,] _pixels;
@@ -78,7 +71,6 @@ namespace WhittedRayTracer
                     Normalize(line, CalculateColorValue(color.Red, maxValue));
                     Normalize(line, CalculateColorValue(color.Green, maxValue));
                     Normalize(line, CalculateColorValue(color.Blue, maxValue));
-                    // line.Append($"{CalculateColorValue(this[x, y].Red, maxValue)} {CalculateColorValue(this[x, y].Green, maxValue)} {CalculateColorValue(this[x, y].Blue, maxValue)} ");
                 }
 
                 content.Append($"{line.ToString().Trim()}\n");

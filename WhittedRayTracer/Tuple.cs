@@ -28,9 +28,7 @@ namespace WhittedRayTracer
         
         public override bool Equals(object obj)
         {
-            var item = obj as Tuple;
-            
-            if (item == null)
+            if (!(obj is Tuple item))
             {
                 return false;
             }
