@@ -27,6 +27,26 @@ namespace WhittedRayTracer
 
         public int Y
             => _y;
+        
+        public static Matrix Identity
+            => new Matrix(4, 4)
+            {
+                All = new double[,] {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}}
+            };
+
+        public Matrix Transpose()
+        {
+            var result = new Matrix(X, Y);
+            for (int x = 0; x < X; x++)
+            {
+                for (int y = 0; y < Y; y++)
+                {
+                    result[y, x] = this[x, y];
+                }
+            }
+
+            return result;
+        }
 
         public override bool Equals(object obj)
         {
@@ -103,12 +123,5 @@ namespace WhittedRayTracer
 
             return new Tuple(res[0], res[1], res[2], res[3]);
         }
-
-        public static Matrix Identity
-            => new Matrix(4, 4)
-            {
-                All = new double[,] {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}}
-            };
-     
     }
 }

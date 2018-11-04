@@ -127,5 +127,21 @@ namespace WhittedRayTracer.Tests
             
             Assert.Equal(a, actual);
         }
+
+        [Fact(DisplayName = "Transposing a matrix")]
+        public void TransposingMatrix()
+        {
+            var a = new Matrix(4, 4)
+            {
+                All = new double[,] {{0,9,3,0},{9,8,0,8},{1,8,5,3},{0,0,5,8}}
+            };
+            
+            var expected = new Matrix(4, 4)
+            {
+                All = new double[,] {{0,9,1,0},{9,8,8,0},{3,0,5,5},{0,8,3,8}}
+            };
+            
+            Assert.Equal(expected, a.Transpose());
+        }
     }
 }
